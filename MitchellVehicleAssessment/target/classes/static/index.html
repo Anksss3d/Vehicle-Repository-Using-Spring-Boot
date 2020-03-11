@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mitchell International Assessment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<!-- Google Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+<!-- Bootstrap core CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<!-- Material Design Bootstrap -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.13.0/css/mdb.min.css" rel="stylesheet">
+  
+</head>
+<body>
+
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+  <a class="navbar-brand" href="#">Mitchell International Assessment</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      
+      <li class="nav-item">
+        <button class="nav-link waves-effect waves-light btn btn-link" data-toggle="modal" data-target="#aboutModal">
+          <i class="fas fa-file-alt"></i> About
+        </button>
+      </li>
+
+
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+	
+<div class="container" style="text-align: center" id="step-1-div" data-step="1">
+<h2><b><u>VEHICLES</u></b></h2>
+<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addVehicleModal" data-step="2"><i class="fas fa-plus-circle"></i> Add Vehicle</button>
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#filterVehicleModal" data-step="3"><i class="fas fa-filter"></i> Filter Vehicles</button>
+<button class="btn btn-warning btn-sm" onclick="refreshTable()"><i class="fa fa-download" data-step="4"></i> View All Vehicles</button>
+</div>
+
+<hr />
+<div class="container-fluid" style="text-align:center;overflow-x: scroll;">
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Id</th>
+	      <th>Make</th>
+	      <th>Model</th>
+	      <th>Year</th>
+	      <th>Update</th>
+	      <th>Delete</th>
+	    </tr>
+	  </thead>
+	  <tbody id = "tableBody">
+
+	  </tbody>
+	</table>
+</div>
+<hr />
+
+
+
+<!-- Add Vehicle Modal -->
+<div class="modal fade" id="addVehicleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-md" role="document">
+
+
+    <div class="modal-content">
+    	<form action="#" id="addVehicleForm">
+	      <div class="modal-header">
+	        <h4 class="modal-title w-100" id="myModalLabel">Add New Vehicle Object</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <label>Vehicle Make:</label>
+	        <input type="text" class="form-control" name="make" required="required">
+	        <label>Vehicle Model:</label>
+	        <input type="text" class="form-control" name="model" required="required">
+	        <label>Vehicle Year:</label>
+	        <input type="text" class="form-control" name="vehicleYear" required="required">
+	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary btn-sm">Add Object</button>
+	      </div>
+      	</form>
+    </div>
+  </div>
+</div>
+<!-- Add Vehicle Modal -->
+
+
+<!-- Update Vehicle Modal -->
+<div class="modal fade" id="updateVehicleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-md" role="document">
+
+
+    <div class="modal-content">
+    	<form action="#" id="updateVehicleForm">
+	      <div class="modal-header">
+	        <h4 class="modal-title w-100" id="myModalLabel">Update Vehicle Object</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <label>Vehicle Id:</label>
+	        <input type="number" class="form-control" name="id" id="update-form-id" readOnly = "readOnly">
+	        <label>Vehicle Make:</label>
+	        <input type="text" class="form-control" name="make" id="update-form-make" required="required">
+	        <label>Vehicle Model:</label>
+	        <input type="text" class="form-control" name="model" id="update-form-model" required="required">
+	        <label>Vehicle Year:</label>
+	        <input type="number" class="form-control" name="vehicleYear" id="update-form-vehicleYear" required="required">
+	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary btn-sm">Update Object</button>
+	      </div>
+      	</form>
+    </div>
+  </div>
+</div>
+<!-- Update Vehicle Modal -->
+
+
+<!-- Filter Vehicles Modal -->
+<div class="modal fade" id="filterVehicleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-md" role="document">
+
+
+    <div class="modal-content">
+    	<form action="#" id="filterVehiclesForm">
+	      <div class="modal-header">
+	        <h4 class="modal-title w-100" id="myModalLabel">Filter Vehicles</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+			<label>Select Attribute:</label>
+			<select name="param" class="form-control">
+				<option value="make">Make</option>
+				<option value="model">Model</option>
+				<option value="vehicleYear">Year</option>
+			</select>
+			<label>Enter Value: </label>
+			<input type="text" class="form-control" name="value" required="required">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+	        <button type="submit" class="btn btn-primary btn-sm">Filter Vehicles</button>
+	      </div>
+      	</form>
+    </div>
+  </div>
+</div>
+<!-- Filter Vehicles Modal -->
+
+
+<!-- Project Details Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-md" role="document">
+
+
+    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title w-100" id="myModalLabel">Mitchell International Assessment</h4>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+			<label><b>Project Name:</b> Mitchell International Vehicle Assessment</label>
+			<label><b>Framework:</b> Spring Boot</label>
+			<label><b>Features: </b><br>
+			<ul>
+				<li>Vehicle Object Rest Services</li>
+				<li>Custom Vehicle Retrieval (Using any Parameter) </li>
+				<li>Spring Boot JPA (In Memory Persistence) </li>
+				<li>Automated Testing using JUnit 5 </li>
+				<li>Data Validation for all Parameter </li>
+				<li>Client for testing Services </li>
+			</ul>
+			
+			</label>
+			<br>
+			<label><b>Developer:</b> 
+			<ul style="list-style:none;">
+				<li><b>Ankur Yadav</b></li>
+				<li>Research Associate </li>
+				<li>The University of Texas at Dallas</li>
+				<li>+1 (469) 258 8256 </li>
+				<li> ankur.yadav@utdallas.edu </li>
+			</ul>
+			</label>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+	      </div>
+    </div>
+  </div>
+</div>
+<!-- Project Details Modal -->
+
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.13.0/js/mdb.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	refreshTable();
+	
+	$("#addVehicleForm").submit(function(e){
+		e.preventDefault();
+		formJson = generateJSONFromForm($("#addVehicleForm"));
+		$.ajax({
+			  url: "/vehicles",
+			  type: "POST",
+			  contentType:"application/json; charset=utf-8",
+			  data: JSON.stringify(formJson),
+			  datatype: "json",
+			  success: function(data){
+				  if (data==""){
+					  alert("Object Creation Failed. Please enter valid year value (1950-2025)");
+				  }
+				  else{
+					  alert("Vehicle Object Created Successfully");
+				  }
+				  $("#addVehicleModal").modal("hide");
+				  refreshTable();
+			  },
+			});
+	});
+	
+	$("#updateVehicleForm").submit(function(e){
+		e.preventDefault();
+		formJson = generateJSONFromForm($("#updateVehicleForm"));
+		$.ajax({
+			  url: "/vehicles/"+formJson.id,
+			  type: "PUT",
+			  contentType:"application/json; charset=utf-8",
+			  data: JSON.stringify(formJson),
+			  datatype: "json",
+			  success: function(data){
+				  if (data==""){
+					  alert("Object Updation Failed. Please enter valid year value (1950-2025)");
+				  }
+				  else{
+					  alert("Vehicle Object Updated Successfully");
+				  }
+				  $("#updateVehicleModal").modal("hide");
+				  refreshTable();
+			  },
+			});
+	});
+	
+	$("#filterVehiclesForm").submit(function(e){
+		e.preventDefault();
+		formJson = generateJSONFromForm($("#filterVehiclesForm"));
+		$.ajax({
+			  url: "/vehicles/"+formJson.param+"/"+formJson.value,
+			  type: "GET",
+			  contentType:"application/json; charset=utf-8",
+			  datatype: "json",
+			  success: function(data){
+				  $("#filterVehicleModal").modal("hide");
+				  updateDataTable(data);
+			  },
+			});
+	});
+	
+});
+
+
+function refreshTable(){
+	$.ajax({
+		  url: "/vehicles",
+		  data: {},
+		  datatype: "json",
+		  success: function(data){
+			  updateDataTable(data);
+		  },
+		});
+}
+
+function updateDataTable(data){
+	//alert("In update: "+data);
+	$("#tableBody").html("");
+	for (i=0; i<data.length; i++){
+		rowData = `
+		    <tr>
+		      <th>`+data[i].id+`</th>
+		      <td>`+data[i].make+`</td>
+		      <td>`+data[i].model+`</td>
+		      <td>`+data[i].vehicleYear+`</td>
+		      <td><button class="btn btn-success btn-sm" onclick="updateModalToggle(`+data[i].id+`)">Update</button></td> 
+		      <td><button class="btn btn-danger btn-sm" onclick="deleteObject(`+data[i].id+`)">Delete</button></td>
+		    </tr>
+		`;
+		$("#tableBody").append(rowData);
+	}
+}
+
+function generateJSONFromForm(formObject){
+	var formdata = formObject.serializeArray();
+	var data = {};
+	$(formdata ).each(function(index, obj){
+	    data[obj.name] = obj.value;
+	});
+	return data;
+}
+
+function updateModalToggle(id){
+	$.ajax({
+		  url: "/vehicles/"+id,
+		  data: {},
+		  datatype: "json",
+		  success: function(data){
+			  $("#update-form-id").attr("value", data.id);
+			  $("#update-form-make").attr("value", data.make);
+			  $("#update-form-model").attr("value", data.model);
+			  $("#update-form-vehicleYear").attr("value", data.vehicleYear);
+			  $("#updateVehicleModal").modal("show");
+		  },
+		});	
+}
+
+function deleteObject(id){
+	res = confirm("Please confirm deletion of object with id: "+id);
+	if (res == false){
+		return;
+	}
+	$.ajax({
+		  url: "/vehicles/"+id,
+		  type: "DELETE",
+		  contentType:"application/json; charset=utf-8",
+		  datatype: "json",
+		  success: function(data){
+			  alert("Object Deleted Successfully");
+			  refreshTable();
+		  },
+		});
+}
+
+</script>
+
+</body>
+</html>

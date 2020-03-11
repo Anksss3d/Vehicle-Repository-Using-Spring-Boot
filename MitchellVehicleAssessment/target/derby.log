@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Wed Mar 11 11:38:22 CDT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0170-ca76-17a3-000001ecef50 
+on database directory memory:C:\Users\ankss\Documents\workspace-spring-tool-suite-4-4.5.1.RELEASE\MitchellVehicleAssessment\target\testdb with class loader org.springframework.boot.loader.LaunchedURLClassLoader@4459eb14 
+Loaded from jar:file:/C:/Users/ankss/Documents/workspace-spring-tool-suite-4-4.5.1.RELEASE/MitchellVehicleAssessment/target/MitchellVehicleAssessment-0.0.1-SNAPSHOT.jar!/BOOT-INF/lib/derby-10.14.2.0.jar!/
+java.vendor=Oracle Corporation
+java.runtime.version=13.0.1+9
+user.dir=C:\Users\ankss\Documents\workspace-spring-tool-suite-4-4.5.1.RELEASE\MitchellVehicleAssessment\target
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
